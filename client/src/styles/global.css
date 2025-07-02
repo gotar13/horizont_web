@@ -1,0 +1,15 @@
+body {
+  margin: 0;
+  background-color: #F0EFE1;
+  color: #f1f5f9;
+  font-family: 'League Gothic', sans-serif;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}

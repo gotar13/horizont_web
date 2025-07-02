@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "express": "^5.1.0",
+    "express": "^4.18.2",
     "vite": "^6.3.5"
   }
 }

@@ -1,5 +1,5 @@
 // Importáljuk a szükséges modulokat
-const express = require('express');
+const express = require('express@^4.18.2');
 const cors = require('cors');
 const path = require('path');
 require('dotenv').config();

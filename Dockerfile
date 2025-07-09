@@ -1,4 +1,4 @@
-# 1. Fázis: Buildeljük a React appot
+
 FROM node:18 AS frontend
 
 WORKDIR /horizont_web/client
@@ -26,4 +26,5 @@ COPY --from=frontend /horizont_web/client/dist ./client/dist
 EXPOSE 80
 
 # App indítása
-CMD ["node", "server/index.js"]
+WORKDIR /horizont_web/server
+CMD ["node", "index.js"]

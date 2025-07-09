@@ -1,14 +1,14 @@
 import React from 'react';
 import '../styles/comingSoon.css';
-import KoszLogo from '../assets/Koszlogo.png'; // Importáljuk a Kosz logót
+import HorizontLogo from '../assets/Horizontlogo.png'; // Importáljuk a Horizont logót
 
 export default function ComingSoon() {
   return (
     <main className="container">
-      <div className="logoKosz">
+      <div className="logoHorizont">
         <img
-          src={KoszLogo}
-          alt="Kosz_logo"
+          src={HorizontLogo}
+          alt="Horizont_logo"
         />
       </div>
       <h1>Coming Soon</h1>

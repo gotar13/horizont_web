@@ -2,11 +2,14 @@ version: '3'
 
 services:
   horizont_web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "80:80"
     environment:
       - PORT=80
     volumes:
-      - .:/horizont_web
+      - .:/horizont_web:delegated
+      - /horizont_web/server/node_modules
     restart: unless-stopped

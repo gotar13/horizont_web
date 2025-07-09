@@ -1,4 +1,4 @@
-
+# 1. Fázis: Buildeljük a React appot
 FROM node:18 AS frontend
 
 WORKDIR /horizont_web/client
@@ -12,19 +12,23 @@ FROM node:18
 
 WORKDIR /horizont_web
 
-# Backend függőségek telepítése a package.json alapján
+# Backend dependencies installation
 COPY server/package*.json ./server/
-RUN cd server && npm install
+WORKDIR /horizont_web/server
+RUN npm install
 
-# Backend forráskód másolása
+# Go back to main directory
+WORKDIR /horizont_web
+
+# Copy backend source code
 COPY server ./server
 
-# Frontend build másolása a backendbe
+# Copy frontend build
 COPY --from=frontend /horizont_web/client/dist ./client/dist
 
-# Port megnyitása
+# Expose port
 EXPOSE 80
 
-# App indítása
+# Set working directory to server and start app
 WORKDIR /horizont_web/server
 CMD ["node", "index.js"]

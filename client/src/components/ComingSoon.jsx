@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/comingSoon.css';
-import HorizontLogo from '../assets/Horizontlogo.png'; // Importáljuk a Horizont logót
+import HorizontLogo from '../assets/horizont-02.png'; // Importáljuk a Horizont logót
 
 export default function ComingSoon() {
   return (

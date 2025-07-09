@@ -2,34 +2,37 @@
 FROM node:18 AS frontend
 
 WORKDIR /horizont_web/client
+
+# Csak azokat másoljuk be, amik kellenek a telepítéshez
 COPY client/package*.json ./
 RUN npm install
-COPY client ./
+
+# Teljes frontend kód bemásolása
+COPY client/ ./
+
+# Vite build
 RUN npm run build
 
+
 # 2. Fázis: Backend + frontend kiszolgálás
-FROM node:18
+FROM node:18-slim
 
-WORKDIR /horizont_web/server
-
-# Másoljuk be a backend package fájlokat
-COPY server/package*.json ./
-
-# Telepítsük a backend függőségeit
-RUN npm install
-
-# Most már bemásolhatjuk a backend kódot is
-COPY server/ ./
-
-# Lépjünk vissza a fő mappába
 WORKDIR /horizont_web
 
-# Másoljuk be a frontend buildet a megfelelő helyre
+# Backend dependency fájlok bemásolása
+COPY server/package*.json ./server/
+
+# Függőségek telepítése
+RUN cd server && npm install
+
+# Backend kód bemásolása
+COPY server/ ./server/
+
+# Frontend build bemásolása
 COPY --from=frontend /horizont_web/client/dist ./client/dist
 
 # Port megnyitása
 EXPOSE 80
 
-# Lépjünk vissza a szerver mappába és indítsuk el az alkalmazást
-WORKDIR /horizont_web/server
-CMD ["node", "index.js"]
+# Alkalmazás indítása
+CMD ["node", "server/index.js"]

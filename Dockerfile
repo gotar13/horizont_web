@@ -17,13 +17,13 @@ RUN npm run build
 # 2. Fázis: Backend + frontend kiszolgálás
 FROM node:18-slim
 
-WORKDIR /horizont_web
+WORKDIR /horizont_web/server
 
 # Backend dependency fájlok bemásolása
-COPY server/package*.json ./server/
+COPY server/package*.json ./
 
 # Függőségek telepítése
-RUN cd server && npm install
+RUN npm install
 
 # Backend kód bemásolása
 COPY server/ ./server/
@@ -35,4 +35,4 @@ COPY --from=frontend /horizont_web/client/dist ./client/dist
 EXPOSE 80
 
 # Alkalmazás indítása
-CMD ["node", "server/index.js"]
+CMD ["node", "index.js"]

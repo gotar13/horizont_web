@@ -10,25 +10,26 @@ RUN npm run build
 # 2. Fázis: Backend + frontend kiszolgálás
 FROM node:18
 
-WORKDIR /horizont_web
-
-# Backend dependencies installation
-COPY server/package*.json ./server/
 WORKDIR /horizont_web/server
+
+# Másoljuk be a backend package fájlokat
+COPY server/package*.json ./
+
+# Telepítsük a backend függőségeit
 RUN npm install
 
-# Go back to main directory
+# Most már bemásolhatjuk a backend kódot is
+COPY server/ ./
+
+# Lépjünk vissza a fő mappába
 WORKDIR /horizont_web
 
-# Copy backend source code
-COPY server ./server
-
-# Copy frontend build
+# Másoljuk be a frontend buildet a megfelelő helyre
 COPY --from=frontend /horizont_web/client/dist ./client/dist
 
-# Expose port
+# Port megnyitása
 EXPOSE 80
 
-# Set working directory to server and start app
+# Lépjünk vissza a szerver mappába és indítsuk el az alkalmazást
 WORKDIR /horizont_web/server
 CMD ["node", "index.js"]

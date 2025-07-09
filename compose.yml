@@ -10,7 +10,7 @@ services:
     environment:
       - PORT=80
     volumes:
-    - ./client/dist:/horizont_web/client/dist
-    - .:/horizont_web:delegated
-    - /horizont_web/server/node_modules
+      - ./client/dist:/horizont_web/client/dist
+      - ./server:/horizont_web/server
+      - /horizont_web/server/node_modules
     restart: unless-stopped
